@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
-<body>
+<body onload="document.body.classList.add('loaded')">
     <div class="app">
         <nav class="navbar">
             <div class="nav-brand">
@@ -118,16 +118,21 @@
                 </div>
                 <div class="result-card">
                     <div class="card-header">
-                        <h2>Sources</h2>
+                        <h2>Relevant Sources</h2>
                         <span id="debateSourceCount" class="source-count"></span>
                     </div>
                     <div id="debateSources" class="sources-list"></div>
                 </div>
             </div>
+            
+            <section class="about-section">
+                <h2>About This Agent</h2>
+                <p>This AI Research Agent is designed to provide deep, evidence-based insights by scouring the web, synthesizing information from multiple trusted sources, and providing citations. Whether you're researching complex topics or need your arguments challenged through structured debate, this agent acts as your personal research assistant.</p>
+            </section>
         </main>
 
         <footer class="footer">
-            <span>Powered by OpenRouter</span>
+            <p>&copy; 2026 AI Research Assistant. Built for deep thinking.</p>
         </footer>
     </div>
 

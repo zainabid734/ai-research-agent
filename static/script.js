@@ -91,11 +91,20 @@ function handleSubmit() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
     })
-        .then((res) => {
-            if (!res.ok) {
-                return res.json().then((data) => { throw new Error(data.error || "Request failed"); });
+        .then(async (res) => {
+            let data;
+            try {
+                data = await res.json();
+            } catch (e) {
+                throw new Error("Unable to parse server response.");
             }
-            return res.json();
+            if (!res.ok) {
+                if (res.status === 429) {
+                    throw new Error(data.error || "Rate limit exceeded. Please try again later.");
+                }
+                throw new Error(data.error || `Request failed with status ${res.status}`);
+            }
+            return data;
         })
         .then((data) => {
             clearInterval(stepAnim);
